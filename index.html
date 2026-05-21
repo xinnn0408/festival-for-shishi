@@ -472,7 +472,9 @@
           else el.classList.remove("active");
         });
         if (state === STATES.LOGIN) {
+          // 尝试自动播放，如果被浏览器拦截，首次点击也会触发
           tryStartMusic();
+          initMusicOnFirstClick();
         }
       }
 
@@ -675,13 +677,20 @@
       meteorNextBtn.addEventListener("click", () => advanceFrom(STATES.METEOR));
       fireworksNextBtn.addEventListener("click", () => advanceFrom(STATES.FIREWORKS));
 
-      // 离开首页后才启动音乐
       let musicStarted = false;
       function tryStartMusic() {
         if (musicStarted) return;
         musicStarted = true;
         if (!userInteracted) userInteracted = true;
         tryPlayMusic();
+      }
+      // 用户首次点击页面任意处即启动音乐（兼容浏览器自动播放策略）
+      function initMusicOnFirstClick() {
+        const handler = () => {
+          document.removeEventListener("pointerdown", handler);
+          tryStartMusic();
+        };
+        document.addEventListener("pointerdown", handler, { passive: true });
       }
       window.addEventListener("resize", () => {
         if (fireworksRenderer) fireworksRenderer.resize();
