@@ -335,7 +335,6 @@
         <br>
         <button id="enterBtn" class="btn">进入</button>
         <div id="loginError" class="error"></div>
-        <!-- 首页无音乐，进入后自动播放 -->
         <div class="music-note" id="musicStatus">🎵 XMASwu(吴骜) - 《7%》</div>
       </div>
     </section>
@@ -377,7 +376,7 @@
     </section>
   </div>
 
-  <audio id="bgMusic" preload="none" loop>
+  <audio id="bgMusic" preload="auto" loop>
     <source src="./bgmusic.mp3" type="audio/mpeg">
   </audio>
 
@@ -527,7 +526,7 @@
           await bgMusic.play();
           musicStatus.textContent = "🎵 XMASwu(吴骜) - 《7%》 ♪";
         } catch (_err) {
-          musicStatus.textContent = "🎵 XMASwu(吴骜) - 《7%》";
+          musicStatus.textContent = "🎵 点击页面播放《7%》";
         }
       }
 
@@ -689,12 +688,20 @@
         const handler = () => {
           document.removeEventListener("pointerdown", handler);
           if (!userInteracted) userInteracted = true;
-          // 用用户手势重试播放（绕过 autoplay 策略）
           musicTried = false;
           musicStarted = false;
-          tryStartMusic();
+          forcePlayMusic();
         };
-        document.addEventListener("pointerdown", handler, { passive: true });
+        document.addEventListener("pointerdown", handler, { passive: true, once: true });
+      }
+      function forcePlayMusic() {
+        tryStartMusic();
+        if (bgMusic.paused) {
+          bgMusic.volume = 0.5;
+          bgMusic.play().then(() => {
+            musicStatus.textContent = "🎵 XMASwu(吴骜) - 《7%》 ♪";
+          }).catch(() => {});
+        }
       }
       window.addEventListener("resize", () => {
         if (fireworksRenderer) fireworksRenderer.resize();
