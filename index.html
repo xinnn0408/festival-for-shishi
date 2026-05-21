@@ -722,7 +722,7 @@
         function resize() {
           w = canvas.width = window.innerWidth;
           h = canvas.height = window.innerHeight;
-          stars = Array.from({ length: Math.max(60, Math.floor((w * h) / 24000)) }, () => ({
+          stars = Array.from({ length: Math.max(40, Math.floor((w * h) / 35000)) }, () => ({
             x: Math.random() * w,
             y: Math.random() * h,
             r: Math.random() * 1.6 + 0.2,
@@ -770,7 +770,7 @@
 
           if (performance.now() >= nextMeteorAt) {
             spawnMeteor();
-            nextMeteorAt = performance.now() + 600 + Math.random() * 1200;
+            nextMeteorAt = performance.now() + 800 + Math.random() * 1500;
           }
 
           meteors = meteors.filter((m) => m.life > 0);
