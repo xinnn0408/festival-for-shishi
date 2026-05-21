@@ -688,6 +688,10 @@
       function initMusicOnFirstClick() {
         const handler = () => {
           document.removeEventListener("pointerdown", handler);
+          if (!userInteracted) userInteracted = true;
+          // 用用户手势重试播放（绕过 autoplay 策略）
+          musicTried = false;
+          musicStarted = false;
           tryStartMusic();
         };
         document.addEventListener("pointerdown", handler, { passive: true });
