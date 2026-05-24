@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>节日快乐</title>
+  <link rel="dns-prefetch" href="//xinnn0408.github.io">
+  <link rel="preconnect" href="//xinnn0408.github.io">
+  <link rel="preload" as="audio" href="./bgmusic-compressed.mp3" crossorigin>
+  <link rel="preload" as="video" href="./meteor-compressed.mp4" crossorigin>
+  <link rel="preload" as="video" href="./fireworks-compressed.mp4" crossorigin>
   <style>
     :root {
       --pink-bg: #e7a094;
@@ -320,7 +325,7 @@
   </div>
 
   <audio id="bgMusic" preload="auto" loop>
-    <source src="./bgmusic.mp3" type="audio/mpeg">
+    <source src="./bgmusic-compressed.mp3" type="audio/mpeg">
   </audio>
 
   <script>
@@ -329,9 +334,9 @@
         PREVIEW_MODE: false,
         PASSWORD: "1125",
         UNLOCK_AT_SHANGHAI: "2026-05-19T00:00:00+08:00",
-        MUSIC_PLACEHOLDER: "./bgmusic.mp3",
-        METEOR_BG_VIDEO_SRC: "./meteor.mp4",
-        FIREWORKS_BG_VIDEO_SRC: "./fireworks.mp4",
+        MUSIC_PLACEHOLDER: "./bgmusic-compressed.mp3",
+        METEOR_BG_VIDEO_SRC: "./meteor-compressed.mp4",
+        FIREWORKS_BG_VIDEO_SRC: "./fireworks-compressed.mp4",
         FIREWORKS_LINES: [
           "感恩相遇，感恩狮狮的每一天"
         ]
